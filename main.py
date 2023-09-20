@@ -51,5 +51,6 @@ class GameUI(): #expanding in the future, instead of making the user reguess the
             print("The correct sequence was actually: ", actual_color_sequence)
             break
 
-GameUI()
+if __name__ == '__main__':
+    GameUI()
   
