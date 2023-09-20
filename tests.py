@@ -15,8 +15,8 @@ class ComIncorrect(unittest.TestCase):
         feedback = Feedback()
 
         color_code.game_color_code = [1,2,3,4,5,6]
-        user_guess = [6,5,4,3,2,1]
-        result = feedback.get_result_of_guess(user_guess, color_code.game_color_code)
+        user_guess_sequence = [6,5,4,3,2,1]
+        result = feedback.get_result_of_guess(user_guess_sequence, color_code.game_color_code)
 
         self.assertNotIn(1, result)
     
