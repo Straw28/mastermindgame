@@ -34,7 +34,7 @@ class Feedback():
         
 
 
-class GameUI(): #expanding in the future, instead of making the user reguess the whole sequence, just ask them to reguess the parts they missed, kinda like hangman
+class GameUI(): 
 
     game_start =  True
     number_of_guesses = 5 #5 for testing purposes
