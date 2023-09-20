@@ -1,6 +1,6 @@
 import unittest
 
-class TestCanary(unittest.Testcase):
+class TestCanary(unittest.TestCase):
     def test_canary(self):
         self.assertTrue(True)
 
