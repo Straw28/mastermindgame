@@ -34,23 +34,23 @@ class Feedback():
         
 
 
-class GameUI(): 
+# class GameUI(): 
 
-    game_start =  True
-    number_of_guesses = 5 #5 for testing purposes
-    user_guess_sequence = []
-    color = ColorCode()
-    actual_color_sequence = color.return_code()
-    result = Feedback()
+#     game_start =  True
+#     number_of_guesses = 5 #5 for testing purposes
+#     user_guess_sequence = []
+#     color = ColorCode()
+#     actual_color_sequence = color.return_code()
+#     result = Feedback()
 
-    while True:
-        user_guess_string = input("Enter your guess: \n")
-        user_guess_sequence = user_guess_string.split(',')
-        print(result.get_result_of_guess(user_guess_sequence, actual_color_sequence))
-        number_of_guesses -= 1
+#     while True:
+#         user_guess_string = input("Enter your guess: \n")
+#         user_guess_sequence = user_guess_string.split(',')
+#         print(result.get_result_of_guess(user_guess_sequence, actual_color_sequence))
+#         number_of_guesses -= 1
         
-        if (number_of_guesses <= 0) or (-1 not in (result.get_result_of_guess(user_guess_sequence, actual_color_sequence))): # the second condition is checking to make sure there are no silver boxes
-            print("The correct sequence was actually: ", actual_color_sequence)
-            break
+#         if (number_of_guesses <= 0) or (-1 not in (result.get_result_of_guess(user_guess_sequence, actual_color_sequence))): # the second condition is checking to make sure there are no silver boxes
+#             print("The correct sequence was actually: ", actual_color_sequence)
+#             break
 
 
