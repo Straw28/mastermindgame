@@ -1,5 +1,5 @@
 import unittest
-from main import ColorCode, Feedback, GameUI
+from src.main import ColorCode, Feedback, GameUI
 
 #Canary Test
 class TestCanary(unittest.TestCase):
@@ -21,5 +21,5 @@ class ComIncorrect(unittest.TestCase):
         self.assertNotIn(1, result)
     
 
- if  __name__ == '__main__':
-        unittest.main()
+if  __name__ == '__main__':
+    unittest.main()
