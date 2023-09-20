@@ -1,6 +1,6 @@
 import tkinter as tk
-import pytest as pt
-from PIL import Image
+#import pytest as pt
+#from PIL import Image
 import random
 
 
@@ -54,5 +54,3 @@ class GameUI():
             break
 
 
-if __name__ == '__main__':
-    GameUI()

@@ -1,5 +1,5 @@
 import unittest
-from src.main import ColorCode, Feedback, GameUI
+from src.main import ColorCode, Feedback
 
 #Canary Test
 class TestCanary(unittest.TestCase):
