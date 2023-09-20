@@ -24,10 +24,12 @@ class Color():
 class Feedback():
 
     def get_result_of_guess(self, user_guess_sequence, actual_color_sequence):
-        correct_guesses = [0] * len(actual_color_sequence) #initially we'll set everything to 0 (silver) and assume incorrect till we compare
+        correct_guesses = [-1] * len(actual_color_sequence) #initially we'll set everything to 0 (silver) and assume incorrect till we compare
         for i, guess in enumerate(actual_color_sequence):
             if int(user_guess_sequence[i]) == actual_color_sequence[i]:
                 correct_guesses[i] = 1 #black = 1
+            elif int(user_guess_sequence[i]) in actual_color_sequence:
+                correct_guesses[i] = 0
         return correct_guesses
         
 
@@ -47,9 +49,10 @@ class GameUI(): #expanding in the future, instead of making the user reguess the
         print(result.get_result_of_guess(user_guess_sequence, actual_color_sequence))
         number_of_guesses -= 1
         
-        if (number_of_guesses <= 0) or (0 not in (result.get_result_of_guess(user_guess_sequence, actual_color_sequence))): # the second condition is checking to make sure there are no silver boxes
+        if (number_of_guesses <= 0) or (-1 not in (result.get_result_of_guess(user_guess_sequence, actual_color_sequence))): # the second condition is checking to make sure there are no silver boxes
             print("The correct sequence was actually: ", actual_color_sequence)
             break
+
 
 if __name__ == '__main__':
     GameUI()
