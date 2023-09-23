@@ -2,7 +2,7 @@ Please replace this with list of tests you can think of
 -Canary Test : assert True test
 -Failing test for Incorrect Guess - No Black or Silver:
     When the user makes an incorrect guess with no colors in the combination, the game should return empty result. No black or silver.
--...
--...
-
-
+-Failing test for Incorrect Guess - Incorrect Black Count:
+    When user makes an incorrect guess, the game incorrectly reports the number of black colors(correctly placed). i.e. if the user guesses all colors correctly, but one is in the wrong position, the game reports six blacks colors instead of five.
+-Failing test for Incorrect Guess - Incorrect Silver Count:
+    When user makes an incorrect guess, the game incorrectly reports the number of silver colors(incorrectly placed). i.e. if the user guesses all colors correctly, but only one is in the right position, the game reports one silver color instead of five.
