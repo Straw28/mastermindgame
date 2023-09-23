@@ -1,6 +1,10 @@
 class MasterMind:
-  def please_remove_this_sample(self):
-    return 1
+  def code_match(self, user_guess, actual_color_code):
+    if user_guess == actual_color_code:
+      return True
+    
+    return False
+
 
 
 

@@ -1,0 +1,2 @@
+x canary
+x guess with all colors match in position
