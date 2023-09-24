@@ -1,6 +1,5 @@
 import unittest
-#from src.mastermind import MasterMind
-from mastermind import MasterMind
+from src.mastermind import MasterMind
 
 class MasterMindTests(unittest.TestCase):
   def test_canary(self):

@@ -4,9 +4,9 @@ class MasterMind:
       correct_guesses = [''] * len(actual_color_code) 
       
       for i, guess in enumerate(actual_color_code):
-          if int(user_guess[i]) == actual_color_code[i]:
+          if user_guess[i] == actual_color_code[i]:
               correct_guesses[i] = 'black'
-          elif int(user_guess[i]) in actual_color_code:
+          elif user_guess[i] in actual_color_code:
               correct_guesses[i] = 'silver'
       
       return correct_guesses
