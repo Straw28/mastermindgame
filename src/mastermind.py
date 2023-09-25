@@ -11,18 +11,18 @@ class Colors(Enum):
     BLACK = 'black'
     SILVER = 'silver'
 
-def code_match(user_guess, actual_color_code):
+class Match(Enum):
+    EXACT = 'exact'
+    PARTIAL = 'partial'
+
+def guess(user_guess, actual_color_code):
 
     correct_guesses = [''] * len(actual_color_code) 
     
     for i in range(len(actual_color_code)):
         if user_guess[i] == actual_color_code[i]:
-            correct_guesses[i] = Colors.BLACK
-        elif user_guess[i] in actual_color_code:
-            correct_guesses[i] = Colors.SILVER
-        else:
-            correct_guesses[i] = ''  
-    
+            correct_guesses[i] = Match.EXACT
+
     return correct_guesses
 
 
