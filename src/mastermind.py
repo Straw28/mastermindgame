@@ -13,15 +13,13 @@ class Colors(Enum):
 
 def code_match(user_guess, actual_color_code):
 
-    color = Colors()
-    
     correct_guesses = [''] * len(actual_color_code) 
     
     for i in range(len(actual_color_code)):
         if user_guess[i] == actual_color_code[i]:
-            correct_guesses[i] = color.BLACK
+            correct_guesses[i] = Colors.BLACK
         elif user_guess[i] in actual_color_code:
-            correct_guesses[i] = color.SILVER
+            correct_guesses[i] = Colors.SILVER
         else:
             correct_guesses[i] = ''  
     

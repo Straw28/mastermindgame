@@ -10,14 +10,13 @@ class MasterMindTests(unittest.TestCase):
     self.assertTrue(True)
 
   def test_code_match_mixed_results(self):
-    color = Colors(Enum)
     
-    user_guess = [color.YELLOW, color.RED, color.CYAN, color.VIOLET, color.PINK, color.ORANGE]
-    actual_code = [color.YELLOW, color.RED, color.GREEN, color.ORANGE, color.CYAN, color.PINK]
+    user_guess = [Colors.YELLOW, Colors.RED, Colors.CYAN, Colors.VIOLET, Colors.PINK, Colors.ORANGE]
+    actual_code = [Colors.YELLOW, Colors.RED, Colors.GREEN, Colors.ORANGE, Colors.CYAN, Colors.PINK]
 
     response = code_match(user_guess, actual_code)
     
-    expected = [color.BLACK, color.BLACK, color.SILVER, '', color.SILVER, color.SILVER]
+    expected = [Colors.BLACK, Colors.BLACK, Colors.SILVER, '', Colors.SILVER, Colors.SILVER]
 
     self.assertEqual(expected, response)
 
