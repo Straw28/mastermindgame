@@ -1,8 +1,7 @@
 import unittest
-#from src.mastermind import code_match
-from mastermind import code_match
-from mastermind import Colors
-from enum import Enum
+from src.mastermind import code_match
+from src.mastermind import Colors
+
 
 
 class MasterMindTests(unittest.TestCase):
