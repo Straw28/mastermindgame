@@ -7,7 +7,9 @@ class MasterMind:
           if user_guess[i] == actual_color_code[i]:
               correct_guesses[i] = 'black'
           elif user_guess[i] in actual_color_code:
-              correct_guesses[i] = 'silver'
+               correct_guesses[i] = 'silver'
+          else:
+              correct_guesses[i] = ''  
       
       return correct_guesses
 
