@@ -4,6 +4,8 @@ from src.mastermind import Colors
 from src.mastermind import Match
 
 
+globals().update(Colors.__members__)
+globals().update(Match.__members__)
 
 class MasterMindTests(unittest.TestCase):
   def test_canary(self):
@@ -11,13 +13,11 @@ class MasterMindTests(unittest.TestCase):
 
   def test_code_match_mixed_results(self):
     
-    selected_colors = [Colors.YELLOW, Colors.RED, Colors.GREEN, Colors.ORANGE, Colors.CYAN, Colors.PINK]
+    selected_colors = [YELLOW, RED, GREEN, ORANGE, CYAN, PINK]
 
     response = guess(selected_colors, selected_colors)
-    
-    expected = [Match.EXACT] * len(selected_colors)
 
-    self.assertEqual(expected, response)
+    self.assertEqual([EXACT]*6, response) 
 
 
 
