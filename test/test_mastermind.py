@@ -17,7 +17,7 @@ class MasterMindTests(unittest.TestCase):
 
     response = guess(selected_colors, selected_colors)
 
-    self.assertEqual([EXACT]*6, response) 
+    self.assertEqual([EXACT] * 6, response) 
 
 
 
