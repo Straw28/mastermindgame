@@ -23,17 +23,22 @@ class Match(Enum):
     UNKNOWN = 2
 
 def guess(user_guess, actual_color_code):
-    correct_guesses = [''] * len(actual_color_code) 
-    
+    exact_count = 0
+    partial_count = 0
+    unknown_count = 0
+
     for i in range(len(actual_color_code)):
         if user_guess[i] == actual_color_code[i]:
-            correct_guesses[i] = Match.EXACT
-        elif user_guess[i] in actual_color_code:
-            correct_guesses[i] = Match.PARTIAL
+            exact_count += 1
+        elif user_guess[i] in actual_color_code and user_guess[i] != actual_color_code[i]:
+            partial_count += 1
         else:
-            correct_guesses[i] = Match.UNKNOWN
-      
-    return correct_guesses
+            unknown_count += 1
+
+
+    feedback_string = [Match.EXACT] * exact_count + [Match.PARTIAL] * partial_count + [Match.UNKNOWN] * unknown_count
+
+    return feedback_string
     
 
 
