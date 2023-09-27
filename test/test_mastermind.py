@@ -1,8 +1,8 @@
 import unittest
 from parameterized import parameterized
-from mastermind import guess
-from mastermind import Colors
-from mastermind import Match
+from src.mastermind import guess
+from src.mastermind import Colors
+from src.mastermind import Match
 
 
 globals().update( Colors.__members__)
