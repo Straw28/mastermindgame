@@ -18,9 +18,9 @@ class Colors(Enum):
 
 
 class Match(Enum):
-    EXACT = 'exact'
-    PARTIAL = 'partial'
-    UNKNOWN = 'unknown'
+    EXACT = 0
+    PARTIAL = 1
+    UNKNOWN = 2
 
 def guess(user_guess, actual_color_code):
     correct_guesses = [''] * len(actual_color_code) 
