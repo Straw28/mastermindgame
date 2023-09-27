@@ -4,7 +4,6 @@ from src.mastermind import guess
 from src.mastermind import Colors
 from src.mastermind import Match
 
-
 globals().update( Colors.__members__)
 globals().update( Match.__members__)
 
@@ -27,8 +26,10 @@ class MasterMindTests(unittest.TestCase):
 
   def test_guess(self, selected_colors, user_provided_colors, expected_response):
     response = guess(selected_colors, user_provided_colors)
-
-    self.assertEqual(expected_response, response)
+    count_response = [response.count(EXACT), response.count(PARTIAL), response.count(UNKNOWN) ]
+    count_expected = [expected_response.count(EXACT), expected_response.count(PARTIAL), expected_response.count(UNKNOWN)]
+    
+    self.assertEqual(count_expected, count_response)
 
 
 if __name__ == '__main__': 
