@@ -8,11 +8,19 @@ class Colors(Enum):
     CYAN = 'cyan'
     PINK = 'pink'
     VIOLET = 'violet'
+    BLUE = 'blue'
+    TEAL = 'teal'
+    MAGENTA = 'magenta'
+    BROWN = 'brown'
+    SKY_BLUE = 'sky_blue'
+
+
 
 
 class Match(Enum):
     EXACT = 'exact'
     PARTIAL = 'partial'
+    UNKNOWN = 'unknown'
 
 def guess(user_guess, actual_color_code):
     correct_guesses = [''] * len(actual_color_code) 
@@ -22,6 +30,8 @@ def guess(user_guess, actual_color_code):
             correct_guesses[i] = Match.EXACT
         elif user_guess[i] in actual_color_code:
             correct_guesses[i] = Match.PARTIAL
+        else:
+            correct_guesses[i] = Match.UNKNOWN
       
     return correct_guesses
     
