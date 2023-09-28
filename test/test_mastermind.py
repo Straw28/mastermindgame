@@ -26,6 +26,7 @@ class MasterMindTests(unittest.TestCase):
 
   def test_guess(self, selected_colors, user_provided_colors, expected_response):
     response = guess(selected_colors, user_provided_colors)
+    
     count_response = [response.count(EXACT), response.count(PARTIAL), response.count(UNKNOWN) ]
     count_expected = [expected_response.count(EXACT), expected_response.count(PARTIAL), expected_response.count(UNKNOWN)]
     

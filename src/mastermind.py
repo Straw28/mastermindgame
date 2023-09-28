@@ -30,9 +30,9 @@ def guess(selected_colors, user_provided_colors):
 
 
 
-    feedback_string = [Match.EXACT] * exact_matches + [Match.PARTIAL] * partial_matches + [Match.UNKNOWN] * unknown_matches
+    feedback = [[Match.EXACT] * exact_matches , [Match.PARTIAL] * partial_matches , [Match.UNKNOWN] * unknown_matches]
 
-    return feedback_string
+    return feedback
     
 
 
