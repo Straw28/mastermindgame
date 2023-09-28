@@ -31,13 +31,18 @@ class MasterMindTests(unittest.TestCase):
 
     self.assertEqual(expected_response, response)
 
+ 
   def test_max_tries(self):
-    MasterMindGame.MAX_TRIES = 3
-    guess_1 = MasterMindGame.guess([YELLOW, RED, GREEN, ORANGE, CYAN, PINK], [PINK, YELLOW, RED, GREEN, ORANGE, CYAN])
-    guess_2 = MasterMindGame.guess([YELLOW, RED, GREEN, ORANGE, CYAN, PINK], [VIOLET, BLUE, TEAL, MAGENTA, BROWN, SKY_BLUE])
-    guess_3 = MasterMindGame.guess([YELLOW, RED, GREEN, ORANGE, CYAN, PINK], [YELLOW, RED, GREEN, ORANGE, BROWN, SKY_BLUE])
+    print("her 1 e")
+    game = MasterMindGame()
+    print("here")
+    for i in range(game.MAX_TRIES + 1):
+      user_guess = game.guess([YELLOW, RED, GREEN, ORANGE, CYAN, PINK], [YELLOW, RED, GREEN, ORANGE, BROWN, SKY_BLUE])
+      game.decrease_tries_remaining()
 
-    self.assertEqual()
+    self.assertEqual(0, game.MAX_TRIES)
+
+
 
 if __name__ == '__main__': 
   unittest.main()

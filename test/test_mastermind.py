@@ -3,6 +3,7 @@ from parameterized import parameterized
 from src.mastermind import guess
 from src.mastermind import Colors
 from src.mastermind import Match
+from src.mastermind import MasterMindGame
 
 globals().update( Colors.__members__)
 globals().update( Match.__members__)
@@ -32,6 +33,13 @@ class MasterMindTests(unittest.TestCase):
     
     self.assertEqual(count_expected, count_response)
 
+def test_max_tries(self):
+    game = MasterMindGame()
+    for i in range(game.MAX_TRIES + 1):
+      user_guess = game.guess([YELLOW, RED, GREEN, ORANGE, CYAN, PINK], [YELLOW, RED, GREEN, ORANGE, BROWN, SKY_BLUE])
+      game.decrease_tries_remaining()
+
+    self.assertEqual(0, game.MAX_TRIES)
 
 if __name__ == '__main__': 
   unittest.main()
