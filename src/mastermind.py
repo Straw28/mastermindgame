@@ -24,15 +24,12 @@ class Match(Enum):
     UNKNOWN = 2
 
 def guess(selected_colors, user_provided_colors):
-    exact_matches = sum(1 for sel, user in zip(selected_colors, user_provided_colors) if sel == user)
-    partial_matches = sum((Counter(selected_colors)& Counter(user_provided_colors)).values())- exact_matches
-    unknown_matches = len(selected_colors) - exact_matches - partial_matches
 
-
-
-    feedback = [[Match.EXACT] * exact_matches , [Match.PARTIAL] * partial_matches , [Match.UNKNOWN] * unknown_matches]
-
-    return feedback
+    match_for_position = lambda i: (Match.EXACT if selected_colors[i] == user_provided_colors[i]
+                                    else Match.PARTIAL if selected_colors[i] in user_provided_colors
+                                    else Match.UNKNOWN)
+    
+    return sorted([match_for_position(i) for i in range(len(user_provided_colors))], key = lambda match: match.value)
     
 
 
