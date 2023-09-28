@@ -26,7 +26,7 @@ class MasterMindTests(unittest.TestCase):
   )
 
   def test_guess(self, selected_colors, user_provided_colors, expected_response):
-    response = guess(selected_colors, user_provided_colors)
+    response = guess(user_provided_colors, selected_colors)
 
     self.assertEqual(expected_response, response)
 
