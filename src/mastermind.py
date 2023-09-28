@@ -22,15 +22,15 @@ class Match(Enum):
     PARTIAL = 1
     UNKNOWN = 2
 
-def guess(user_guess, actual_color_code):
+def guess(selected_colors, user_provided_colors):
     exact_count = 0
     partial_count = 0
     unknown_count = 0
 
-    for i in range(len(actual_color_code)):
-        if user_guess[i] == actual_color_code[i]:
+    for i in range(len(selected_colors)):
+        if user_provided_colors[i] == selected_colors[i]:
             exact_count += 1
-        elif user_guess[i] in actual_color_code and user_guess[i] != actual_color_code[i]:
+        elif user_provided_colors[i] in selected_colors and user_provided_colors[i] != selected_colors[i]:
             partial_count += 1
         else:
             unknown_count += 1
