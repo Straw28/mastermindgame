@@ -1,4 +1,5 @@
 from enum import Enum
+from collections import Counter
 
 class Colors(Enum):
     YELLOW = 'yellow'
@@ -23,20 +24,13 @@ class Match(Enum):
     UNKNOWN = 2
 
 def guess(selected_colors, user_provided_colors):
-    exact_count = 0
-    partial_count = 0
-    unknown_count = 0
-
-    for i in range(len(selected_colors)):
-        if user_provided_colors[i] == selected_colors[i]:
-            exact_count += 1
-        elif user_provided_colors[i] in selected_colors and user_provided_colors[i] != selected_colors[i]:
-            partial_count += 1
-        else:
-            unknown_count += 1
+    exact_matches = sum(1 for sel, user in zip(selected_colors, user_provided_colors) if sel == user)
+    partial_matches = sum((Counter(selected_colors)& Counter(user_provided_colors)).values())- exact_matches
+    unknown_matches = len(selected_colors) - exact_matches - partial_matches
 
 
-    feedback_string = [Match.EXACT] * exact_count + [Match.PARTIAL] * partial_count + [Match.UNKNOWN] * unknown_count
+
+    feedback_string = [Match.EXACT] * exact_matches + [Match.PARTIAL] * partial_matches + [Match.UNKNOWN] * unknown_matches
 
     return feedback_string
     
