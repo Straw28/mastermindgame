@@ -3,8 +3,8 @@ from parameterized import parameterized
 from mastermind import Colors
 from mastermind import Match
 from mastermind import MasterMindGame
-from mastermind import play_game
-from mock import mock
+from unittest.mock import patch
+from io import StringIO
 
 
 
@@ -64,17 +64,28 @@ class MasterMindTests(unittest.TestCase):
 
     self.assertTrue(game.give_up())
 
-  class PlayGameTest(unittest.TestCase):
-      def test_game_ends_correctly_if_user_runs_out_of_tries(self):
-      
-          mock_game = mock.Mock(spec=MasterMindGame)
+  @patch('sys.stdout', new_callable=StringIO)
+  @patch('builtins.input', side_effect=['red blue green orange cyan pink', 'green yellow pink', 'give up'])
+  def test_play_game(self, mock_input, mock_stdout):
+    game = MasterMindGame()
+    game.play_game()
 
-          mock_game.MAX_TRIES = 0
+  @patch('sys.stdout', new_callable=StringIO)
+  @patch('builtins.input', side_effect=['red blue green orange cyan pink'])
+  def test_play_game_user_wins(self, mock_input, mock_stdout):
+    game = MasterMindGame()
+    game.selected_colors = [RED, BLUE, GREEN, ORANGE, CYAN, PINK ]
+    game.play_game()
+    
+    output = mock_stdout.getvalue()
 
-          play_game(mock_game)
+    self.assertIn(f"You won! The code was: {', '.join([str(color) for color in game.selected_colors])}", output)
 
-          self.assertEqual(mock_game.is_game_over(), True)
-          self.assertEqual(mock_game.tries_remaining, 0)
+  @patch('sys.stdout', new_callable=StringIO)
+  @patch('builtins.input', side_effect=['red blue green orange cyan pink'])
+    
+
+
 
 
 
