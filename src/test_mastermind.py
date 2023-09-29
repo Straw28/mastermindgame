@@ -9,6 +9,7 @@ from mastermind import MasterMindGame
 globals().update( Colors.__members__)
 globals().update( Match.__members__)
 
+
 class MasterMindTests(unittest.TestCase):
   def test_canary(self):
     self.assertTrue(True)

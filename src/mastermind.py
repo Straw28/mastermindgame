@@ -1,5 +1,7 @@
 from enum import Enum
 import random
+from tkinter import *
+from tkinter import ttk
 
 class Colors(Enum):
     YELLOW = 'yellow'
@@ -21,6 +23,19 @@ class Match(Enum):
     PARTIAL = 1
     UNKNOWN = 2
 
+
+class Window(Tk):
+    def __init__(self):
+        super().__init__()
+
+        self.title("Hello World")
+
+        self.button = Button(text="My simple app.")
+        self.button.bind("", self.handle_button_press)
+        self.button.pack()
+
+    def handle_button_press(self, event):
+        self.destroy()
 
 class MasterMindGame:
    
@@ -53,6 +68,7 @@ class MasterMindGame:
 
     def game_won(self, user_colors):
         return all(match == Match.EXACT for match in self.guess(self.selected_colors, user_colors))
+
 
 def play_game():
     game = MasterMindGame() 
@@ -90,4 +106,10 @@ def play_game():
         
 
 if __name__ == "__main__":
+    root = Tk()
+    frm = ttk.Frame(root, padding=300)
+    frm.grid()
+    ttk.Label(frm, text="Hello World!").grid(column=0, row=0)
+    ttk.Button(frm, text="Quit", command=root.destroy).grid(column=1, row=0)
+    root.mainloop()
     play_game()
