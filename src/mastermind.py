@@ -74,6 +74,22 @@ class MasterMindGame():
     def print_result_of_guess(self, user_guess):
         print("Result:", user_guess)
     
+
+    def process_user_input(self, user_input):
+        if not self.valid_input(user_input):
+            return False
+
+        user_provided_colors = self.transform_input(user_input)
+        user_guess = self.guess(self.selected_colors, user_provided_colors)
+        self.decrease_tries_remaining()
+        self.print_result_of_guess()
+
+        if self.game_won(user_guess) or self.is_game_over():
+            return True
+
+        return False
+
+
     def play_game(self):
         while self.MAX_TRIES > 0:
             user_input = self.get_user_input()
@@ -81,18 +97,8 @@ class MasterMindGame():
             if self.give_up(user_input):
                 break
 
-            if not self.valid_input(user_input):
-                continue
-
-            
-            user_provided_colors = self.transform_input(user_input)
-            user_guess = self.guess(self.selected_colors, user_provided_colors)
-            self.decrease_tries_remaining()
-
-            self.print_result_of_guess()
-
-            if self.game_won(user_guess) or self.is_game_over():
-                    break
+            if self.process_user_input(user_input):
+                break
 
 
 
