@@ -49,10 +49,14 @@ class MasterMindGame():
             return self.game_over
     
     def is_game_over(self):
-        return self.game_over  or self.MAX_TRIES == 0
+        if(self.game_over  or self.MAX_TRIES == 0):
+            print(f"Game over! You ran out of tries. The secret code was: {', '.join([str(color) for color in self.selected_colors])}")
+            return True
 
     def game_won(self, user_guess):
-        return all(match == Match.EXACT for match in user_guess)
+        if all(match == Match.EXACT for match in user_guess):
+            print(f"You won! The code was: {', '.join([str(color) for color in self.selected_colors])}")
+            return True 
 
     def get_user_input(self):
         user_input = input("Enter your guess (e.g., red blue green): ").strip().split()
@@ -88,11 +92,10 @@ class MasterMindGame():
                 self.print_result_of_guess()
 
                 if self.game_won(user_guess):
-                    print(f"You won! The code was: {', '.join([str(color) for color in self.selected_colors])}")
                     break
 
                 if self.is_game_over():
-                    print(f"Game over! You ran out of tries. The secret code was: {', '.join([str(color) for color in self.selected_colors])}")
+                    break
 
 
 
