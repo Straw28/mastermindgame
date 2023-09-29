@@ -3,6 +3,8 @@ from parameterized import parameterized
 from mastermind import Colors
 from mastermind import Match
 from mastermind import MasterMindGame
+from mastermind import play_game
+from mock import mock
 
 
 
@@ -61,6 +63,18 @@ class MasterMindTests(unittest.TestCase):
     game.give_up()
 
     self.assertTrue(game.give_up())
+
+  class PlayGameTest(unittest.TestCase):
+      def test_game_ends_correctly_if_user_runs_out_of_tries(self):
+      
+          mock_game = mock.Mock(spec=MasterMindGame)
+
+          mock_game.MAX_TRIES = 0
+
+          play_game(mock_game)
+
+          self.assertEqual(mock_game.is_game_over(), True)
+          self.assertEqual(mock_game.tries_remaining, 0)
 
 
 
