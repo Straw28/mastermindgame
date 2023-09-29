@@ -54,7 +54,7 @@ class MasterMindTests(unittest.TestCase):
 
     response = game.guess(user_colors, actual_colors)
     
-    self.assertTrue(game.game_won())
+    self.assertTrue(game.game_won(response))
 
   def test_player_gives_up(self):
     game = MasterMindGame()

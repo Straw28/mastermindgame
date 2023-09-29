@@ -1,7 +1,5 @@
 from enum import Enum
 import random
-from tkinter import *
-from tkinter import ttk
 
 class Colors(Enum):
     YELLOW = 'yellow'
@@ -24,28 +22,13 @@ class Match(Enum):
     UNKNOWN = 2
 
 
-class Window(Tk):
+class MasterMindGame():
+    
     def __init__(self):
-        super().__init__()
-
-        self.title("Hello World")
-
-        self.button = Button(text="My simple app.")
-        self.button.bind("", self.handle_button_press)
-        self.button.pack()
-
-    def handle_button_press(self, event):
-        self.destroy()
-
-class MasterMindGame:
-   
-    def __init__(self):
-        self.MAX_TRIES = 2
+        self.MAX_TRIES = 3
         self.game_over = False
-        self.selected_colors = random.sample(list(Colors), 3)
-
-       
-
+        self.selected_colors = random.sample(list(Colors), 6)
+    
     def guess(self, selected_colors, user_provided_colors):
 
 
@@ -66,8 +49,8 @@ class MasterMindGame:
     def is_game_over(self):
         return self.game_over  or self.MAX_TRIES == 0
 
-    def game_won(self, user_colors):
-        return all(match == Match.EXACT for match in self.guess(self.selected_colors, user_colors))
+    def game_won(self, user_guess):
+        return all(match == Match.EXACT for match in user_guess)
 
 
 def play_game():
@@ -93,11 +76,10 @@ def play_game():
         user_guess = game.guess(game.selected_colors, user_provided_colors)
         game.decrease_tries_remaining()
 
-        print(game.selected_colors)
         print("Result:", user_guess)
 
 
-        if game.game_won(user_provided_colors): 
+        if game.game_won(user_guess): 
             print(f"You won! The code was: {', '.join([str(color) for color in game.selected_colors])}")
             break
     
@@ -106,10 +88,4 @@ def play_game():
         
 
 if __name__ == "__main__":
-    root = Tk()
-    frm = ttk.Frame(root, padding=300)
-    frm.grid()
-    ttk.Label(frm, text="Hello World!").grid(column=0, row=0)
-    ttk.Button(frm, text="Quit", command=root.destroy).grid(column=1, row=0)
-    root.mainloop()
     play_game()
