@@ -64,34 +64,34 @@ class MasterMindTests(unittest.TestCase):
 
     self.assertTrue(game.give_up())
 
-  # @patch('sys.stdout', new_callable=StringIO)
-  # @patch('builtins.input', side_effect=['red blue green orange cyan pink', 'green yellow pink', 'give up'])
-  # def test_play_game(self, mock_input, mock_stdout):
-  #   game = MasterMindGame()
-  #   game.play_game()
-
-  # @patch('sys.stdout', new_callable=StringIO)
-  # @patch('builtins.input', side_effect=['red blue green orange cyan pink'])
-  # def test_play_game_user_wins(self, mock_input, mock_stdout):
-  #   game = MasterMindGame()
-  #   game.selected_colors = [RED, BLUE, GREEN, ORANGE, CYAN, PINK ]
-  #   game.play_game()
+  @patch('sys.stdout', new_callable=StringIO)
+  @patch('builtins.input', side_effect=['red blue green orange cyan pink', 'green yellow pink', 'give up'])
+  def test_play_game(self, mock_input, mock_stdout):
+    game = MasterMindGame()
     
-  #   output = mock_stdout.getvalue()
 
-  #   self.assertIn(f"You won! The code was: {', '.join([str(color) for color in game.selected_colors])}", output)
+  @patch('sys.stdout', new_callable=StringIO)
+  @patch('builtins.input', side_effect=['red blue green orange cyan pink'])
+  def test_play_game_user_wins(self, mock_input, mock_stdout):
+    game = MasterMindGame()
+    game.selected_colors = [RED, BLUE, GREEN, ORANGE, CYAN, PINK ]
+    
+    
+    output = mock_stdout.getvalue()
 
-  # @patch('sys.stdout', new_callable=StringIO)
-  # @patch('builtins.input', side_effect=['red blue green orange cyan pink', 'red blue green orange cyan pink', 'red blue green orange cyan pink'])
-  # def test_play_game_game_over(self, mock_input, mock_stdout):
-  #   game = MasterMindGame()
-  #   game.MAX_TRIES = 3
-  #   game.selected_colors = [GREEN, RED, CYAN, ORANGE, BLUE, VIOLET]
-  #   game.play_game()
+    self.assertIn(f"You won! The code was: {', '.join([str(color) for color in game.selected_colors])}", output)
 
-  #   output = mock_stdout.getvalue()
+  @patch('sys.stdout', new_callable=StringIO)
+  @patch('builtins.input', side_effect=['red blue green orange cyan pink', 'red blue green orange cyan pink', 'red blue green orange cyan pink'])
+  def test_play_game_game_over(self, mock_input, mock_stdout):
+    game = MasterMindGame()
+    game.MAX_TRIES = 3
+    game.selected_colors = [GREEN, RED, CYAN, ORANGE, BLUE, VIOLET]
+    
 
-  #   self.assertIn(f"Game over! You ran out of tries. The secret code was: {', '.join([str(color) for color in game.selected_colors])}", output)
+    output = mock_stdout.getvalue()
+
+    self.assertIn(f"Game over! You ran out of tries. The secret code was: {', '.join([str(color) for color in game.selected_colors])}", output)
 
 
 
