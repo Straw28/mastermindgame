@@ -42,7 +42,7 @@ class MasterMindTests(unittest.TestCase):
       user_guess = game.guess([YELLOW, RED, GREEN, ORANGE, CYAN, PINK], [YELLOW, RED, GREEN, ORANGE, BROWN, SKY_BLUE])
       game.decrease_tries_remaining()
 
-    self.assertEqual(0, game.MAX_TRIES)
+    self.assertTrue(game.is_game_over())
 
   def test_win_game(self):
     
@@ -52,9 +52,14 @@ class MasterMindTests(unittest.TestCase):
     actual_colors = [YELLOW, RED, GREEN, ORANGE, CYAN, PINK]
 
     response = game.guess(user_colors, actual_colors)
-    expected_response = [EXACT] * 6
     
-    self.assertTrue(response == expected_response)
+    self.assertTrue(game.game_won())
+
+  def test_player_gives_up(self):
+    game = MasterMindGame()
+    game.give_up()
+
+    self.assertTrue(game.give_up())
 
 
 
