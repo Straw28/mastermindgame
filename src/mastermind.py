@@ -24,12 +24,11 @@ class Match(Enum):
 
 
 class MasterMindGame:
-    MAX_TRIES = 20 
+    MAX_TRIES = 0
 
     def __init__(self):
-        #self.selected_colors = selected_colors
-        #self.tries_remaining = MasterMindGame.MAX_TRIES
         self.MAX_TRIES = 20
+
     def guess(self, selected_colors, user_provided_colors):
 
         match_for_position = lambda i: (Match.EXACT if selected_colors[i] == user_provided_colors[i]
@@ -38,14 +37,8 @@ class MasterMindGame:
         
         return sorted([match_for_position(i) for i in range(len(user_provided_colors))], key = lambda match: match.value)
     
-    # def game_over(self):
-    #     return self.tries_remaining == 0
-    
-    # def is_success(self):
-    #     return all(match == Match.EXACT for match in self.guess(self.selected_colors))
-    
-    # def decrease_tries_remaining(self):
-    #     self.tries_remaining -= 1
+    def decrease_tries_remaining(self):
+        self.MAX_TRIES -= 1
     
 
 
