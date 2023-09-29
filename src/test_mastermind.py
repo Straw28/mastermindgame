@@ -82,10 +82,16 @@ class MasterMindTests(unittest.TestCase):
     self.assertIn(f"You won! The code was: {', '.join([str(color) for color in game.selected_colors])}", output)
 
   @patch('sys.stdout', new_callable=StringIO)
-  @patch('builtins.input', side_effect=['red blue green orange cyan pink'])
-    
+  @patch('builtins.input', side_effect=['red blue green orange cyan pink', 'red blue green orange cyan pink', 'red blue green orange cyan pink'])
+  def test_play_game_game_over(self, mock_input, mock_stdout):
+    game = MasterMindGame()
+    game.MAX_TRIES = 3
+    game.selected_colors = [GREEN, RED, CYAN, ORANGE, BLUE, VIOLET]
+    game.play_game()
 
+    output = mock_stdout.getvalue()
 
+    self.assertIn(f"Game over! You ran out of tries. The secret code was: {', '.join([str(color) for color in game.selected_colors])}", output)
 
 
 
