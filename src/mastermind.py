@@ -81,20 +81,17 @@ class MasterMindGame():
             if self.give_up(user_input):
                 break
 
-            elif not self.valid_input(user_input):
+            if not self.valid_input(user_input):
                 continue
 
-            else:
-                user_provided_colors = self.transform_input(user_input)
-                user_guess = self.guess(self.selected_colors, user_provided_colors)
-                self.decrease_tries_remaining()
+            
+            user_provided_colors = self.transform_input(user_input)
+            user_guess = self.guess(self.selected_colors, user_provided_colors)
+            self.decrease_tries_remaining()
 
-                self.print_result_of_guess()
+            self.print_result_of_guess()
 
-                if self.game_won(user_guess):
-                    break
-
-                if self.is_game_over():
+            if self.game_won(user_guess) or self.is_game_over():
                     break
 
 
