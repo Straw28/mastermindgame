@@ -53,41 +53,52 @@ class MasterMindGame():
         return all(match == Match.EXACT for match in user_guess)
 
 
-    def play_game(self):
+    # def play_game(self, user_input):
         
-    
-        while self.MAX_TRIES > 0:
+    #         user_provided_colors = [Colors[color.upper()] for color in user_input]
             
-            print(self.MAX_TRIES)
-            user_input = input("Enter your guess (e.g., red blue green): ").strip().split()
-            
-            if user_input == ["give", "up"]:
-                print(f"The secret code was: {', '.join([str(color) for color in self.selected_colors])}")
-                self.give_up()
-                break
-            
-            if len(user_input) != len(self.selected_colors):
-                print("Invalid guess. Please enter the same number of colors.")
-                continue
-            
-        
-            user_provided_colors = [Colors[color.upper()] for color in user_input]
-            
-            user_guess = self.guess(self.selected_colors, user_provided_colors)
-            self.decrease_tries_remaining()
+    #         user_guess = self.guess(self.selected_colors, user_provided_colors)
+    #         self.decrease_tries_remaining()
 
-            print("Result:", user_guess)
+    #         print("Result:", user_guess)
 
 
-            if self.game_won(user_guess): 
-                print(f"You won! The code was: {', '.join([str(color) for color in self.selected_colors])}")
-                break
+    #         if self.game_won(user_guess): 
+    #             print(f"You won! The code was: {', '.join([str(color) for color in self.selected_colors])}")
         
-            if self.is_game_over():
-                print(f"Game over! You ran out of tries. The secret code was: {', '.join([str(color) for color in self.selected_colors])}")
+    #         if self.is_game_over():
+    #             print(f"Game over! You ran out of tries. The secret code was: {', '.join([str(color) for color in self.selected_colors])}")
         
 
 
 if __name__ == "__main__":
+    
     game = MasterMindGame()
-    game.play_game()
+    
+    while game.MAX_TRIES > 0 and not game.game_won(): 
+        print(game.MAX_TRIES)
+        user_input = input("Enter your guess (e.g., red blue green): ").strip().split()
+
+        if user_input == ["give", "up"]:
+            print(f"The secret code was: {', '.join([str(color) for color in game.selected_colors])}")
+            game.give_up()
+            break
+
+        elif len(user_input) != len(game.selected_colors):
+            print("Invalid guess. Please enter the same number of colors.")
+            continue
+        
+        else:
+            user_provided_colors = [Colors[color.upper()] for color in user_input]
+            
+            user_guess = game.guess(game.selected_colors, user_provided_colors)
+            game.decrease_tries_remaining()
+
+            print("Result:", user_guess)
+
+
+            if game.game_won(user_guess): 
+                print(f"You won! The code was: {', '.join([str(color) for color in game.selected_colors])}")
+        
+            if game.is_game_over():
+                print(f"Game over! You ran out of tries. The secret code was: {', '.join([str(color) for color in game.selected_colors])}")
