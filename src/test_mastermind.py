@@ -44,6 +44,18 @@ class MasterMindTests(unittest.TestCase):
 
     self.assertEqual(0, game.MAX_TRIES)
 
+  def test_win_game(self):
+    
+    game = MasterMindGame() 
+
+    user_colors = [YELLOW, RED, GREEN, ORANGE, CYAN, PINK]
+    actual_colors = [YELLOW, RED, GREEN, ORANGE, CYAN, PINK]
+
+    response = game.guess(user_colors, actual_colors)
+    expected_response = [EXACT] * 6
+    
+    self.assertTrue(response == expected_response)
+
 
 
 if __name__ == '__main__': 

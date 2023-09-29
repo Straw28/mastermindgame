@@ -24,7 +24,7 @@ class Match(Enum):
 
 
 class MasterMindGame:
-    MAX_TRIES = 0
+    MAX_TRIES = 20
 
     def __init__(self):
         self.MAX_TRIES = 20
