@@ -48,7 +48,7 @@ class MasterMindTests(unittest.TestCase):
   def test_player_gives_up(self):
     game = MasterMindGame()
     self.assertFalse(game.game_over)
-    self.assertTrue(game.give_up())
+    self.assertTrue(game.give_up(['give','up']))
     self.assertTrue(game.game_over)
   
   def test_is_game_over_is_not_over(self):
@@ -64,15 +64,47 @@ class MasterMindTests(unittest.TestCase):
     game = MasterMindGame()
     response = [EXACT] * 6
     self.assertTrue(game.game_won(response))
-    
+
   def test_game_not_won(self):
     game = MasterMindGame()
     response = [EXACT, EXACT, EXACT, PARTIAL, PARTIAL, PARTIAL]
     self.assertFalse(game.game_won(response))
 
+  @patch('builtins.input', side_effect=['red blue green'])
+  def test_get_user_input(self, mock_input):
+    game = MasterMindGame()
+    user_input = game.get_user_input()
+    self.assertEqual(user_input, ['red', 'blue', 'green'])
+
+  def test_valid_input_valid(self):
+    game = MasterMindGame()
+    user_input = ['red', 'blue', 'green']
+    result = game.valid_input(user_input)
+    self.assertFalse(result)
+
+  def test_valid_input_invalid(self):
+    game = MasterMindGame()
+    user_input = ['red', 'blue', 'green', 'orange']
+    with patch('sys.stdout', new_callable=StringIO) as mock_stdout:
+      result = game.valid_input(user_input)
+    output = mock_stdout.getvalue()
+    self.assertIn("Invalid guess. Please enter the same number of colors.", output)
+    self.assertFalse(result)
   
+  def test_transform_input(self):
+    game = MasterMindGame()
+    user_input = ['red', 'blue', 'green']
+    transformed_input = game.transform_input(user_input)
+    expected_transformed_input = [RED, BLUE, GREEN]
+    self.assertEqual(transformed_input, expected_transformed_input)
 
-
+  def test_print_result_of_guess(self):
+    game = MasterMindGame()
+    feedback = [PARTIAL, PARTIAL, PARTIAL]
+    with patch('sys.stdout', new_callable=StringIO) as mock_stdout:
+      game.print_result_of_guess(feedback)
+    output = mock_stdout.getvalue()
+    self.assertIn("Result:", output)
 
 if __name__ == '__main__': 
   unittest.main()
