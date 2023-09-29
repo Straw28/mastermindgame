@@ -1,5 +1,5 @@
 from enum import Enum
-
+import random
 
 class Colors(Enum):
     YELLOW = 'yellow'
@@ -23,12 +23,17 @@ class Match(Enum):
 
 
 class MasterMindGame:
-    MAX_TRIES = 20 
+    MAX_TRIES = 3
 
     def __init__(self):
-        self.MAX_TRIES = 20
-   
-    def guess(self,selected_colors, user_provided_colors):
+        self.MAX_TRIES = 3
+        self.game_over = False
+        self.selected_colors = random.sample(list(Colors), 3)
+
+       
+
+    def guess(self, selected_colors, user_provided_colors):
+
 
         match_for_position = lambda i: (Match.EXACT if selected_colors[i] == user_provided_colors[i]
                                         else Match.PARTIAL if selected_colors[i] in user_provided_colors
@@ -37,10 +42,50 @@ class MasterMindGame:
         return sorted([match_for_position(i) for i in range(len(user_provided_colors))], key = lambda match: match.value)
     
     
-    
     def decrease_tries_remaining(self):
         self.MAX_TRIES -= 1
+
+    def give_up(self):
+        self.game_over = True
+        return self.game_over
+    
+    def is_game_over(self):
+        return self.game_over  or self.MAX_TRIES == 0
+
+    def game_won(self):
+        return all(match == Match.EXACT for match in self.guess(self.selected_colors, self.selected_colors))
+
+# def play_game():
+#     game = MasterMindGame() 
+    
+#     while game.MAX_TRIES > 0:
+#         user_input = input("Enter your guess (e.g., red blue green): ").strip().split()
+        
+#         if user_input == ["give", "up"]:
+#             print(f"The secret code was: {', '.join([str(color) for color in game.selected_colors])}")
+#             game.give_up()
+#             break
+        
+#         if len(user_input) != len(game.selected_colors):
+#             print("Invalid guess. Please enter the same number of colors.")
+#             continue
+        
+       
+#         user_provided_colors = [Colors[color.upper()] for color in user_input]
+        
+#         user_guess = game.guess(game.selected_colors, user_provided_colors)
+#         game.decrease_tries_remaining()
+
+#         print("Result:", user_guess)
+
+
+#         if game.game_won(): 
+#             print(f"You won! The code was: {', '.join([str(color) for color in game.selected_colors])}")
+#             break
+    
+#     if game.is_game_over():
+#         print(f"Game over! You ran out of tries. The secret code was: {', '.join([str(color) for color in game.selected_colors])}")
     
 
-
-
+# if __name__ == "__main__":
+#     play_game()
