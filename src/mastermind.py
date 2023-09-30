@@ -66,6 +66,7 @@ class MasterMindGame():
         if len(user_input) != len(self.selected_colors):
                 print("Invalid guess. Please enter the same number of colors.")
                 return False
+        return True
     
     def transform_input(self, user_input):
         user_provided_colors = [Colors[color.upper()] for color in user_input]
@@ -78,15 +79,15 @@ class MasterMindGame():
     def process_user_input(self, user_input):
         if not self.valid_input(user_input):
             return False
-
+        
         user_provided_colors = self.transform_input(user_input)
         user_guess = self.guess(self.selected_colors, user_provided_colors)
         self.decrease_tries_remaining()
-        self.print_result_of_guess()
+        self.print_result_of_guess(user_guess)
 
         if self.game_won(user_guess) or self.is_game_over():
             return True
-
+        
         return False
 
 
