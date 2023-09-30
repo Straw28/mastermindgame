@@ -106,5 +106,90 @@ class MasterMindTests(unittest.TestCase):
     output = mock_stdout.getvalue()
     self.assertIn("Result:", output)
 
+  
+  @patch('builtins.input', side_effect=["red blue green yellow pink teal"])
+  def test_process_user_input_valid(self, mock_input):
+    game = MasterMindGame()
+    game.MAX_TRIES = 1
+    game.selected_colors =  [RED, BLUE, GREEN, YELLOW, PINK, TEAL]
+    user_input = game.get_user_input()
+    self.assertTrue(game.process_user_input(user_input))
+
+  @patch('builtins.input', side_effect=["red blue green yellow pink"])
+  def test_process_user_invalid_input(self, mock_input):
+    game = MasterMindGame()
+    user_input = game.get_user_input()
+    self.assertFalse(game.process_user_input(user_input))
+
+  @patch('builtins.input', side_effect=["red brown green orange pink"])
+  def test_process_user_input_cont_game(self, mock_input):
+    game = MasterMindGame()
+    user_input = game.get_user_input()
+    game.selected_colors = [RED, BLUE, GREEN, YELLOW, PINK, TEAL]
+    self.assertFalse(game.process_user_input(user_input))
+    
+  @patch('builtins.input', side_effect=["red blue green yellow pink teal"])
+  def test_process_game_won(self, mock_input):
+    game = MasterMindGame()
+    game.selected_colors =  [RED, BLUE, GREEN, YELLOW, PINK, TEAL]
+    game.MAX_TRIES = 3
+    user_input = game.get_user_input()
+    self.assertTrue(game.process_user_input(user_input))
+
+  @patch('builtins.input', side_effect=["red blue green yellow pink teal"])
+  def test_process_game_over(self, mock_input):
+    game = MasterMindGame()
+    game.MAX_TRIES = 1
+    self.assertTrue(game.process_user_input(game.get_user_input()))
+
+  def test_play_game_give_up(self):
+    game = MasterMindGame()
+    
+    with patch('builtins.input', side_effect=["give up"]):
+        game.play_game()
+    
+    self.assertTrue(game.is_game_over())
+    self.assertTrue(game.game_over)
+
+  def test_play_game_game_won(self):
+    game = MasterMindGame()
+    game.selected_colors = [RED, BLUE, GREEN, YELLOW, PINK, TEAL]
+
+    
+    with patch('builtins.input', side_effect=["red blue green yellow pink teal"]):
+        game.play_game()
+    
+    self.assertTrue(game.game_won(game.guess(game.selected_colors, game.transform_input(["red", "blue", "green", "yellow", "pink", "teal"]))))
+    self.assertTrue(game.is_game_over())
+
+  def test_play_game_game_over(self):
+    game = MasterMindGame()
+    game.MAX_TRIES = 1
+    game.selected_colors = [RED, BROWN, GREEN, VIOLET, PINK, ORANGE]
+    with patch('builtins.input', side_effect=["red blue green yellow pink teal"]):
+      game.play_game()
+    
+    self.assertTrue(game.is_game_over())
+
+  def test_play_game_give_up(self):
+    game = MasterMindGame()
+    
+    
+    with patch('builtins.input', side_effect=["give up"]):
+      game.play_game()
+    
+    self.assertTrue(game.is_game_over())
+    self.assertTrue(game.game_over)
+
+  def test_play_game_game_won(self):
+    game = MasterMindGame()
+    game.selected_colors = [Colors.RED, Colors.BLUE, Colors.GREEN, Colors.YELLOW, Colors.PINK, Colors.TEAL]
+
+    with patch('builtins.input', side_effect=["red blue green yellow pink teal"]):
+      game.play_game()
+    
+    self.assertTrue(game.game_won(game.guess(game.selected_colors, game.transform_input(["red", "blue", "green", "yellow", "pink", "teal"]))))
+  
+
 if __name__ == '__main__': 
   unittest.main()
