@@ -60,7 +60,7 @@ class MasterMindGame():
             return True 
 
     def get_user_input(self):
-        user_input = input("Enter your guess (e.g., red blue green): ").strip().split()
+        user_input = input("Enter your guess (colors are: red blue green yellow orange violet magenta cyan teal pink): ").strip().split()
         return user_input
     
     def valid_input(self, user_input):
@@ -77,13 +77,13 @@ class MasterMindGame():
         feedback_colors=[]
         for match in user_guess:
             if match == Match.EXACT:
-                feedback_colors.append("Black")
+                feedback_colors.append("BLACK")
             elif match == Match.PARTIAL:
-                feedback_colors.append("Silver")
+                feedback_colors.append("SILVER")
             else: 
                 feedback_colors.append('')
 
-        print("Result:", feedback_colors)
+        print("Result:", ' '.join(feedback_colors))
     
 
     def process_user_input(self, user_input):
