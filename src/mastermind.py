@@ -12,8 +12,6 @@ class Colors(Enum):
     BLUE = 'blue'
     TEAL = 'teal'
     MAGENTA = 'magenta'
-    BROWN = 'brown'
-    SKY_BLUE = 'sky_blue'
 
 
 class Match(Enum):
