@@ -121,7 +121,7 @@ class MasterMindTests(unittest.TestCase):
     user_input = game.get_user_input()
     self.assertFalse(game.process_user_input(user_input))
 
-  @patch('builtins.input', side_effect=["red brown green orange pink"])
+  @patch('builtins.input', side_effect=["red cyan green orange pink violet"])
   def test_process_user_input_cont_game(self, mock_input):
     game = MasterMindGame()
     user_input = game.get_user_input()
