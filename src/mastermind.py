@@ -23,7 +23,7 @@ class Match(Enum):
 class MasterMindGame():
     
     def __init__(self):
-        self.MAX_TRIES = 3
+        self.MAX_TRIES = 20
         self.game_over = False
         self.selected_colors = random.sample(list(Colors), 6)
     
