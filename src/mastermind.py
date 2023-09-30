@@ -42,18 +42,21 @@ class MasterMindGame():
 
     def give_up(self, user_input):
         if user_input == ["give", "up"]:
-            print(f"The secret code was: {', '.join([str(color) for color in self.selected_colors])}")
+            code_color = [color.name for color in self.selected_colors]
+            print(f"The secret code was: {', '.join([str(color) for color in code_color])}")
             self.game_over = True
             return self.game_over
     
     def is_game_over(self):
         if(self.game_over  or self.MAX_TRIES == 0):
-            print(f"Game over! You ran out of tries. The secret code was: {', '.join([str(color) for color in self.selected_colors])}")
+            code_color = [color.name for color in self.selected_colors]
+            print(f"Game over! You ran out of tries. The secret code was: {', '.join([str(color) for color in code_color])}")
             return True
 
     def game_won(self, user_guess):
         if all(match == Match.EXACT for match in user_guess):
-            print(f"You won! The code was: {', '.join([str(color) for color in self.selected_colors])}")
+            code_color = [color.name for color in self.selected_colors]
+            print(f"You won! The code was: {', '.join([str(color) for color in code_color])}")
             return True 
 
     def get_user_input(self):
